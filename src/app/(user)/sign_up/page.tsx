@@ -21,6 +21,7 @@ import {authService} from "@/settings/services/user";
 import {noticeFalse} from "@/helpers";
 import {useRouter} from "next/navigation"
 import  ReCAPTCHA from "react-google-recaptcha"
+import {setData} from "@/storage";
 
 
 
@@ -61,7 +62,10 @@ const page=()=> {
                if (userInfo.password===userInfo.confirmPassword) {
                    if (captchaValue){
                        const res = await dispatch(authService.signup(userInfo));
+                       console.log("rep",res)
                        if (res.meta.requestStatus == "fulfilled") {
+                           setData("token", res?.payload?.data?.access_Token);
+                           setData("user", res?.payload?.data?.user);
                            router.push("/home");
                        }
                    }

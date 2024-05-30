@@ -24,6 +24,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {authService} from "@/settings/services/user";
 import {noticeFalse} from "@/helpers";
 import {useRouter} from "next/navigation";
+import {setData} from "@/storage";
 
 
 
@@ -54,6 +55,8 @@ const  page=()=>{
                 const res = await dispatch(authService.signin(userInfo));
                 console.log("res",res)
                 if (res.meta.requestStatus == "fulfilled") {
+                     setData("token", res?.payload?.data?.access_token);
+                     setData("user", res?.payload?.data?.user);
                     router.push("/home");
                 }
             } else {

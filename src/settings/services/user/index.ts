@@ -25,11 +25,11 @@ const signin = createAsyncThunk(
                 }
             );
 
+
             const data = await reponse.data;
-            data && setData("token", data?.accessToken);
-            data && setData("user", data?.user);
 
-
+            // data && setData("token", data?.accessToken);
+            // data && setData("user", data?.user);
             return data;
         } catch (error: any) {
             return rejectWithValue(errorHandel(error));
@@ -55,8 +55,8 @@ const signup = createAsyncThunk(
             );
 
             const data = await reponse.data;
-            data && setData("user", data?.user);
-            data && setData("token", data?.accessToken);
+            // data && setData("user", data?.user);
+            // data && setData("token", data?.accessToken);
             return data;
         } catch (error: any) {
             return rejectWithValue(errorHandel(error));
