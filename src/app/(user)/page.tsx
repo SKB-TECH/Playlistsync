@@ -1,5 +1,4 @@
-// eslint-disable-next-line react-hooks/rules-of-hooks
-
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import React, {useState} from 'react'
 import Image from "next/image";
@@ -17,7 +16,7 @@ import {EmailIcon,Icon} from "@chakra-ui/icons";
 import {IoMdLock} from "react-icons/io";
 import { TiSocialFacebook } from "react-icons/ti";
 import { FaGooglePlusG,FaTwitter } from "react-icons/fa";
-import {CLE_SITE, COLORS, validerMotDePasse} from "@/utils";
+import {COLORS, validerMotDePasse} from "@/utils";
 import {Join} from "@/components";
 import Link from "next/link";
 import {AppDispatch, RootState} from "@/settings/store";
@@ -28,27 +27,16 @@ import {useRouter} from "next/navigation";
 
 
 
-export default function page() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+const  page=()=>{
     const dispatch = useDispatch<AppDispatch>();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const {isLoading}=useSelector((state: RootState) => state.user);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { isOpen, onOpen, onClose } = useDisclosure()
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const router = useRouter();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [userInfo,setUserInfo] = useState({
         email:"",
         password:""
     });
 
-
-    // const [captchaValue, setCaptchaValue] = useState(null);
-
-    // const handleCaptchaChange = (value) => {
-    //     setCaptchaValue(value);
-    // };
     const handleInputChange = (name:string, value:string) => {
         setUserInfo({
             ...userInfo,
@@ -154,3 +142,6 @@ export default function page() {
     </section>
   )
 }
+
+
+export default page;

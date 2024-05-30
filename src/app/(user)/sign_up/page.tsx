@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import React, {useState} from 'react'
 import Image from "next/image";
@@ -23,7 +24,8 @@ import  ReCAPTCHA from "react-google-recaptcha"
 
 
 
-export default function page() {
+const page=()=> {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [userInfo,setUserInfo] = useState({
         pseudo:"",
         email:"",
@@ -38,11 +40,9 @@ export default function page() {
         });
     };
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+
     const dispatch = useDispatch<AppDispatch>();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const {isLoading}=useSelector((state: RootState) => state.user);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const router=useRouter()
     const [captchaValue, setCaptchaValue] = useState(null);
 
@@ -161,3 +161,6 @@ export default function page() {
         </section>
     )
 }
+
+
+export default page;
