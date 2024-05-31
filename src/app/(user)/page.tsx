@@ -30,7 +30,7 @@ import {setData} from "@/storage";
 
 const  page=()=>{
     const dispatch = useDispatch<AppDispatch>();
-    const {isLoading}=useSelector((state: RootState) => state.user);
+    const {statusUtils}=useSelector((state: RootState) => state.userInfo);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const router = useRouter();
     const [userInfo,setUserInfo] = useState({
@@ -67,7 +67,8 @@ const  page=()=>{
         }
     };
 
-  return (
+  // @ts-ignore
+    return (
     <section className='py-10 md:mt-10 w-full h-full'>
         <div className='flex flex-col  w-full h-full bg-white padding-container gap-5'>
             <div className='flexCenter gap-5 flex-col w-full'>
@@ -106,13 +107,14 @@ const  page=()=>{
                     </InputGroup>
                 </Stack>
                 {
-                    !isLoading ?
-                        <Button colorScheme={"blue"} width={350} size={"lg"}   onClick={sendInfos}>
+                    //@ts-ignore
+                    !statusUtils.isLoading ?
+                      (  <Button colorScheme={"blue"} width={350} size={"lg"}   onClick={sendInfos}>
                             Connexion
-                        </Button>:
-                        <Button isLoading colorScheme={"blue"} width={350} size={"lg"} >
+                        </Button>):
+                        (<Button isLoading colorScheme={"blue"} width={350} size={"lg"} >
                             Connexion
-                        </Button>
+                        </Button>)
                 }
             </div>
             <div className={'flex flex-col justify-center items-center px-4 py-4 bg-white  padding-container'}>

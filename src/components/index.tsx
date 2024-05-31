@@ -3,3 +3,7 @@ export {default as SidebarLeft} from "./SidebarLeft";
 export {default as SidebarRight} from "./SidebarRight";
 export {default as Navbar} from "./Navbar";
 export {default as Welocme} from "./Welcome";
+export {default as New_session} from "./modals/New_session";
+export {default as Share} from "./Share";
+export {default as Participants} from "./Participants";
+export {default as Options} from "./Options";

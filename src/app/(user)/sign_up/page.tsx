@@ -43,7 +43,6 @@ const page=()=> {
 
 
     const dispatch = useDispatch<AppDispatch>();
-    const {isLoading}=useSelector((state: RootState) => state.user);
     const router=useRouter()
     const [captchaValue, setCaptchaValue] = useState(null);
 

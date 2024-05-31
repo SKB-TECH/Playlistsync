@@ -1,13 +1,19 @@
 "use client";
 
-import React from 'react';
+import React, {useState} from 'react';
 import { LuUserPlus2 } from "react-icons/lu";
 import {FaPlus} from "react-icons/fa";
 import moment from "moment";
-import {Join} from "@/components/index";
+import {Join, New_session} from "@/components/index";
 import {useDisclosure} from "@chakra-ui/react";
 const Welcome =()=> {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [action,setAction]=useState(false)
+
+
+    const showModal=()=>{
+        setAction(!action)
+    }
     return (
         <section className="dark:bg-dark-m bg-light-m px-5 gap-24 flex justify-between min-w-[80%] md:h-96  h-full ">
             <div className={"flex flex-col md:justify-center items-center gap-10 "}>
@@ -15,7 +21,7 @@ const Welcome =()=> {
                     <LuUserPlus2 size={32} color={"white"}/>
                     Joindre une Session
                 </button>
-                <button className={"flex items-center p-2 gap-2 h-14 w-56 bg-rose01 text-white text-lg rounded-lg"}>
+                <button className={"flex items-center p-2 gap-2 h-14 w-56 bg-rose01 text-white text-lg rounded-lg"} onClick={showModal}>
                     <FaPlus size={32} color={"white"} />
                     Créer une Session
                 </button>
@@ -39,6 +45,7 @@ const Welcome =()=> {
                 </div>
             </div>
             <Join isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+            <New_session isOpen={action} onOpen={showModal} onClose={showModal}/>
         </section>
 
     );
@@ -46,3 +53,7 @@ const Welcome =()=> {
 
 
 export default Welcome;
+
+function setAction(ac: any) {
+    throw new Error('Function not implemented.');
+}

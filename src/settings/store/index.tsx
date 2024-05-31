@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "@/settings/slices/user/index"
+import sessionReducer from "@/settings/slices/session/index"
 export function makeStore() {
     return configureStore({
         reducer: {
-            user: userReducer
+            userInfo: userReducer,
+            session:sessionReducer
         },
     });
 }

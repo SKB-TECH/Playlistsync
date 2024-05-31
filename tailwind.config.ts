@@ -32,6 +32,7 @@ const config: Config = {
         "tbleu02":"#07c5f4",
         "tvert01":"#88f744",
         "tvert02":"#13d763",
+
       },
       screens: {
         xs: '400px',

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+//@ts-nocheck
 "use client";
 
 import React from 'react';
@@ -9,45 +11,74 @@ import {RootState} from "@/settings/store";
 import {EditIcon, QuestionOutlineIcon} from "@chakra-ui/icons";
 import {CiSettings} from "react-icons/ci";
 import {HiOutlineDocumentText} from "react-icons/hi";
-
+import { CgLivePhoto } from "react-icons/cg";
+import { FaUsers } from "react-icons/fa";
+import {COLORS} from "@/utils";
 
 const Navbar = () => {
 
     const {setTheme,resolvedTheme}=useTheme()
-    const {pseudo}=useSelector((state:RootState) => state.user.user);
+    const {user}=useSelector((state:RootState) => state.userInfo);
+    const {sessionData,sessionDetail}=useSelector((state:RootState) => state.session);
 
-
+    // @ts-ignore
     return (
-        <section className={"md:ml-[290px] md:min-w-[80%]  h-14 min-w-full border-b-2 dark:border-b-1 dark:border-gray-600 border-gray-20 bg-white dark:bg-dark-m fixed z-10 gap-10 flexEnd px-4"}>
-            <div className={"flex items-center justify-between"}>
-                {
-                    resolvedTheme==="light" ? <FiSun size={24} onClick={()=>setTheme("dark")} color={"#000"}/>:<FiMoon size={24} onClick={()=>setTheme("light")} color={"#fff"}/>
-                }
-            </div>
-            <div>
+        <section className={"flex justify-around items-center md:mr-10 md:ml-[350px] md:min-w-[80%]  h-14 min-w-full border-b-2 dark:border-b-1 dark:border-gray-600 border-gray-20 bg-white dark:bg-dark-m fixed z-10 gap-10 md:px-10 px-4"}>
 
-                <Menu>
-                    <MenuButton>
-                        <Avatar size={"sm"} name={`${pseudo}`} />
-                    </MenuButton>
-                    <MenuList>
-                        <MenuGroup title='Mon Profile'>
-                            <MenuItem icon={<EditIcon />}>Infos Personnelles</MenuItem>
-                            <MenuItem icon={<CiSettings size={20} className={"-ml-1"}/>}>Paramètres </MenuItem>
-                        </MenuGroup>
-                        <MenuDivider />
-                        <MenuGroup title='Aide'>
-                            <MenuItem icon={<HiOutlineDocumentText size={20} className={"-ml-1"}/>}>Documentation</MenuItem>
-                            <MenuItem icon={<QuestionOutlineIcon/>}>FAQ</MenuItem>
-                        </MenuGroup>
-                    </MenuList>
-                </Menu>
+                <div className={"flex h-full items-center gap-2"}>
+                    <h3 className={"text-trose01 font-digital01 truncate w-24"} title={`${sessionData?.name}`}>
+                        Thème: {sessionData?.name}
+                    </h3>
+                </div>
 
+
+                    <div className={"flex justify-between h-full items-center gap-2 md:w-56 w-24"}>
+                        <div className={"flex items-center gap-2"}>
+                            <CgLivePhoto size={22} color={COLORS.rose01} className={"animate-pulse"}/>
+                            <h3 className={"text-trose01 font-digital01"}>
+                                Live
+                            </h3>
+                        </div>
+                        <div className={"flex items-center gap-2"}>
+                            <FaUsers size={22} color={COLORS.rose01} />
+                            <h3 className={"text-trose01 font-digital01"}>
+                                26
+                            </h3>
+                        </div>
+                    </div>
+
+            <div className={"flexEnd h-full gap-5"}>
+                <div className={"flex items-center justify-between"}>
+                    {
+                        resolvedTheme === "light" ? <FiSun size={24} onClick={() => setTheme("dark")} color={"#000"}/> :
+                            <FiMoon size={24} onClick={() => setTheme("light")} color={"#fff"}/>
+                    }
+                </div>
+                <div>
+                    { sessionDetail?.data?.dj?.id==sessionData?.djId &&
+                        <Menu>
+                            <MenuButton>
+                                <Avatar size={"sm"} name={`${user?.pseudo}`}/>
+                            </MenuButton>
+                            <MenuList>
+                                <MenuGroup title='Mon Profile'>
+                                    <MenuItem icon={<EditIcon/>}>Infos Personnelles</MenuItem>
+                                    <MenuItem icon={<CiSettings size={20} className={"-ml-1"}/>}>Paramètres </MenuItem>
+                                </MenuGroup>
+                                <MenuDivider/>
+                                <MenuGroup title='Aide'>
+                                    <MenuItem icon={<HiOutlineDocumentText size={20}
+                                                                           className={"-ml-1"}/>}>Documentation</MenuItem>
+                                    <MenuItem icon={<QuestionOutlineIcon/>}>FAQ</MenuItem>
+                                </MenuGroup>
+                            </MenuList>
+                        </Menu>}
+
+                </div>
             </div>
         </section>
     );
 };
-
 
 
 export default Navbar;

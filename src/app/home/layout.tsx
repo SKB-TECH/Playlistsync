@@ -21,23 +21,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressContentEditableWarning={true}>
-      <body>
+      <body className={"bg-light-m dark:bg-dark-m"}>
             <ProvidersState>
                 <ProviderThemes>
                     <Providers>
                         <div>
                             <SidebarLeft/>
                             <main
-                                className={"min-w-[80%] flex flex-col justify-between  bg-light-m dark:bg-dark-m h-screen"}
+                                className={"min-w-[90%] flex flex-col justify-between  bg-light-m dark:bg-dark-m h-screen"}
                             >
                                 <div className="w-full">
                                     <Navbar/>
                                 </div>
-                                <div className="flex flex-row h-full w-full md:mt-40 padding-container bg-light-m dark:bg-dark-m ">
+                                <div className="md:min-w-[50%] flex flex-row h-full w-full md:mt-16 padding-container bg-light-m dark:bg-dark-m ">
                                     {children}
-                                    {/*<div className={"hidden md:flex max-w-[22%]"}>*/}
-                                    {/*    <SidebarRight/>*/}
-                                    {/*</div>*/}
+                                    <div className={"hidden md:flex max-w-[22%]"}>
+                                        <SidebarRight/>
+                                    </div>
                                 </div>
                             </main>
                         </div>
