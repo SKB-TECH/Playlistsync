@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Checkbox, Editable, EditableInput, EditablePreview} from "@chakra-ui/react";
 import {COLORS} from "@/utils";
 
