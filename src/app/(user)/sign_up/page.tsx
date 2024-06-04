@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import {EmailIcon,Icon} from "@chakra-ui/icons";
 import {IoMdLock} from "react-icons/io";
-import { COLORS, validerMotDePasse} from "@/utils";
+import {CLE_SITE, COLORS, validerMotDePasse} from "@/utils";
 import {BiUser} from "react-icons/bi";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
@@ -44,12 +44,12 @@ const page=()=> {
 
     const dispatch = useDispatch<AppDispatch>();
     const router=useRouter()
-    // const [captchaValue, setCaptchaValue] = useState(null);
+    const [captchaValue, setCaptchaValue] = useState(null);
 
     // //function to valide reptch
-    // const handleCaptchaChange = (value:any) => {
-    //     setCaptchaValue(value);
-    // };
+    const handleCaptchaChange = (value:any) => {
+        setCaptchaValue(value);
+    };
 
 
 
@@ -59,7 +59,7 @@ const page=()=> {
         if (userInfo.email != "" && userInfo.password != ""  && userInfo.pseudo != "" && userInfo.confirmPassword != "") {
             if (validerMotDePasse(userInfo.password)) {
                if (userInfo.password===userInfo.confirmPassword) {
-                //    if (captchaValue){
+                  if (captchaValue){
                        const res = await dispatch(authService.signup(userInfo));
                        console.log("rep",res)
                        if (res.meta.requestStatus == "fulfilled") {
@@ -67,10 +67,10 @@ const page=()=> {
                            setData("user", res?.payload?.data?.user);
                            router.push("/home");
                        }
-                //    }
-                //    else{
-                //        noticeFalse("Vueillez confirme que vous n'etes pas un robot ")
-                //    }
+                   }
+                   else{
+                       noticeFalse("Vueillez confirme que vous n'etes pas un robot ")
+                   }
                }
                else {
                    noticeFalse("Deux mot de passe ne sont pas identiques !!");
@@ -148,10 +148,10 @@ const page=()=> {
                             />
                         </InputGroup>
                     </Stack>
-                        {/* <ReCAPTCHA
+                    <ReCAPTCHA
                             sitekey={CLE_SITE}
                             onChange={handleCaptchaChange}
-                        /> */}
+                        />
                     <Button colorScheme={"blue"} width={350} size={"lg"} onClick={sendInfos}>
                         {"Je m'inscris"}
                     </Button>
