@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "@/settings/store";
 import {sessionService} from "@/settings/services/session";
 import {setData} from "@/storage";
+import {SidebarRight} from "@/components";
 
 const Page =({params}:{params:{id:string}})=> {
     const dispatch = useDispatch<AppDispatch>();
@@ -26,12 +27,13 @@ const Page =({params}:{params:{id:string}})=> {
     }, [dispatch,params?.id]);
 
     return (
-        <section className='fixed flex flex-row md:ml-56 md:padding-container md:min-w-[65%]  gap-10 bg-light-m dark:bg-dark-m min-w-[100%] md:min-h-full'>
-            <div className={"fixed flex flex-col md:min-w-[55%]  md:gap-10 gap-4 bg-light-m dark:bg-dark-m w-[100%] md:min-h-full mt-5 md:mt-0 "}>
-                <div className={"md:min-w-[60%] bg-red-400 border-gray-900 rounded-lg md:h-44 w-[95%] h-32 md:mt-0 mt-10"}>
+        <section  className='fixed flex flex-row justify-between md:ml-32  md:padding-container md:min-w-[100%] gap-5 bg-light-m dark:bg-dark-m w-[100%] md:min-h-full -'>
+            <div className={"md:min-w-[60%] flex flex-col  md:gap-10 gap-4 bg-light-m dark:bg-dark-m md:min-h-full md:mt-0 min-w-full mt-10 "}>
+                <div
+                    className={"md:min-w-[100%] bg-red-400 border-gray-900 rounded-lg md:h-56 w-[95%] h-32 md:mt-0 mt-10"}>
                     Play Music
                 </div>
-                <div className={"md:max-w-[80%] border-gray-900 rounded-lg md:h-[36rem] h-[30rem] w-[100%]"}>
+                <div className={"md:min-w-[80%] border-gray-900 rounded-lg md:h-[36rem] h-[30rem] w-[100%]"}>
                     <div className={"w-full h-full overflow-y-auto customer-scrollbar px-2"}>
                         <Accordion allowMultiple={true}>
                             {
@@ -63,6 +65,9 @@ const Page =({params}:{params:{id:string}})=> {
                         </Accordion>
                     </div>
                 </div>
+            </div>
+            <div className={"hidden md:flex md:min-w-[40%] bg-blue-600 border-l-1 border-gray-200"}>
+                <SidebarRight/>
             </div>
         </section>
     );

@@ -28,16 +28,13 @@ export default function RootLayout({
                         <div>
                             <SidebarLeft/>
                             <main
-                                className={"min-w-[90%] flex flex-col justify-between  bg-light-m dark:bg-dark-m h-screen"}
+                                className={"min-w-[100%] flex flex-col justify-center  bg-light-m dark:bg-dark-m min-h-full"}
                             >
                                 <div className="w-full">
                                     <Navbar/>
                                 </div>
-                                <div className="md:min-w-[50%] flex flex-row h-full w-full md:mt-16 padding-container bg-light-m dark:bg-dark-m ">
+                                <div className="md:min-w-[100%] flex flex-row h-full w-full md:mt-16 padding-container bg-light-m dark:bg-dark-m ">
                                     {children}
-                                    <div className={"hidden md:flex max-w-[22%]"}>
-                                        <SidebarRight/>
-                                    </div>
                                 </div>
                             </main>
                         </div>
