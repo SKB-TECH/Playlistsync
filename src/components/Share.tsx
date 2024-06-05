@@ -32,10 +32,7 @@ const Share = () => {
     const [code,setCode]=useState("");
     const toast=useToast()
     const {setTheme,resolvedTheme}=useTheme()
-    //@ts-ignore
 
-
-    console.log(sessionDetail);
     const shareElement=typeof  window !=="undefined" && window.location.host+`/join/${sessionDetail?.data?.accessCode||sessionData?.accessCode}`;
     const title="Play List Sync"
 

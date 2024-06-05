@@ -30,9 +30,6 @@ const Page =({params}:{params:{id:string}})=> {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
 
-
-
-
     // get all informations of session
     useEffect(() => {
         const sessionData = async () => {
@@ -42,10 +39,9 @@ const Page =({params}:{params:{id:string}})=> {
             }
         }
         sessionData();
-
     }, [dispatch,params?.id]);
 
-    console.log("sessionMusiques***",sessionDetail?.data?.playlist?.musics)
+
 
     const playlist = [
         { url: 'https://www.youtube.com/watch?v=SMcztSqSQ18', title: 'Video 1' },
@@ -189,7 +185,7 @@ const Page =({params}:{params:{id:string}})=> {
             <div className={"hidden md:flex md:min-w-[40%] bg-blue-600 border-l-1 border-gray-200"}>
                 <SidebarRight/>
             </div>
-            <New_url isOpen={isOpen} onClose={onClose} idsession={sessionDatail?.data?.id}/>
+            <New_url isOpen={isOpen} onClose={onClose} idsession={sessionDetail?.data?.id}/>
         </section>
     );
 };
