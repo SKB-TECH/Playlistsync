@@ -189,7 +189,7 @@ const Page =({params}:{params:{id:string}})=> {
             <div className={"hidden md:flex md:min-w-[40%] bg-blue-600 border-l-1 border-gray-200"}>
                 <SidebarRight/>
             </div>
-            <New_url isOpen={isOpen} onClose={onClose} idsession={sessionData?.id}/>
+            <New_url isOpen={isOpen} onClose={onClose} idsession={sessionDatail?.data?.id}/>
         </section>
     );
 };
