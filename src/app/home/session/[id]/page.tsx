@@ -96,7 +96,7 @@ const Page =({params}:{params:{id:string}})=> {
                                 Ajouter des Urls pour votre Session
                             </h3>
                             <button
-                        className={" hover:cursor-pointer flexCenter md:w-34 h-10 w-10 p-1 items-center  bg-gray-400 text-white md:rounded-lg rounded-full"}
+                        className={" hover:cursor-pointer flexCenter md:w-32 h-10 w-10 p-1 items-center  bg-gray-400 text-white md:rounded-lg rounded-full"}
                         onClick={onOpen}
                     >
                         <MdOutlineAddLink size={20} color={"white"}/>
