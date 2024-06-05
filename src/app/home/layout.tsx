@@ -33,7 +33,7 @@ export default function RootLayout({
                                 <div className="w-full">
                                     <Navbar/>
                                 </div>
-                                <div className="md:min-w-[100%] flex flex-row h-full w-full md:mt-16 padding-container bg-light-m dark:bg-dark-m ">
+                                <div className="md:min-w-[90%] flex flex-row h-full w-full md:mt-16 padding-container bg-light-m dark:bg-dark-m ">
                                     {children}
                                 </div>
                             </main>

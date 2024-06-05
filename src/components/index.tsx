@@ -7,3 +7,5 @@ export {default as New_session} from "./modals/New_session";
 export {default as Share} from "./Share";
 export {default as Participants} from "./Participants";
 export {default as Options} from "./Options";
+export {default as Lecteur} from "./Lecteur";
+export {default as New_url} from "./modals/New_url";

@@ -33,17 +33,19 @@ const Navbar = () => {
         removeAll()
         router.push("/");
     }
+
+
     return (
-        <section className={`flex justify-end items-center md:mr-10 ${sessionData?.length>0 && "md:ml-[350px] md:min-w-[80%] justify-around"}  md:min-w-[100%] h-14 min-w-full border-b-2 dark:border-b-1 dark:border-gray-600 border-gray-20 bg-white dark:bg-dark-m fixed z-10 gap-10 md:px-10 px-4`}>
+        <section className={`flex justify-end items-center md:mr-10 ${sessionData?.id && "md:ml-[200px] md:gap-32 md:mr-56 justify-center"}  md:min-w-[100%] h-14 min-w-full border-b-2 dark:border-b-1 dark:border-gray-600 border-gray-20 bg-white dark:bg-dark-m fixed z-10 gap-10 md:px-10 px-4`}>
 
                 <div className={"flex h-full items-center gap-2"}>
-                    {sessionData?.length>0 &&<h3 className={"text-trose01 font-digital01 truncate w-24"} title={`${sessionData?.name}`}>
+                    {sessionData?.id &&<h3 className={"text-trose01 font-digital01 truncate w-24"} title={`${sessionData?.name}`}>
                         Thème: {sessionData?.name}
                     </h3>}
                 </div>
 
 
-            {sessionData?.length>0 && <div className={"flex justify-between h-full items-center gap-2 md:w-56 w-24"}>
+            {sessionData?.id && <div className={"flex justify-between h-full items-center gap-2 md:w-56 w-24"}>
                 <div className={"flex items-center gap-2"}>
                     <CgLivePhoto size={22} color={COLORS.rose01} className={"animate-pulse"}/>
                     <h3 className={"text-trose01 font-digital01"}>
@@ -53,7 +55,7 @@ const Navbar = () => {
                 <div className={"flex items-center gap-2"}>
                     <FaUsers size={22} color={COLORS.rose01}/>
                     <h3 className={"text-trose01 font-digital01"}>
-                        26
+                        {sessionDetail?.data?.participants?.length}
                     </h3>
                 </div>
             </div>}

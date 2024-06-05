@@ -15,7 +15,7 @@ const Welcome =()=> {
         setAction(!action)
     }
     return (
-        <section className="dark:bg-dark-m bg-light-m px-5 gap-24 flex justify-between min-w-[80%] md:h-96  h-full ">
+        <section className="dark:bg-dark-m mt-40 bg-light-m px-5 gap-24 flex justify-between min-w-[80%] md:h-96  h-full ">
             <div className={"flex flex-col md:justify-center items-center gap-10 "}>
                 <button className={"flex items-center p-2 gap-2 h-14 w-56 bg-bleu02 text-white text-lg rounded-lg"} onClick={onOpen}>
                     <LuUserPlus2 size={32} color={"white"}/>
