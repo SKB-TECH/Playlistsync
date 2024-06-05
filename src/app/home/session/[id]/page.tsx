@@ -95,6 +95,15 @@ const Page =({params}:{params:{id:string}})=> {
                             <h3 className={"text-center animate-pulse text-trose01 font-digital01 bold-32"}>
                                 Ajouter des Urls pour votre Session
                             </h3>
+                            <button
+                        className={" hover:cursor-pointer flexCenter md:w-34 h-10 w-10 p-1 items-center  bg-gray-400 text-white md:rounded-lg rounded-full"}
+                        onClick={onOpen}
+                    >
+                        <MdOutlineAddLink size={20} color={"white"}/>
+                        <span className={"hidden md:flex text-white"}>
+                            Url
+                        </span>
+                    </button>
                         </div>
                     )}
                 {sessionDetail?.data?.playlist?.musics.length>0 && <div className={"flex justify-center items-center bg-light-m dark:bg-dark-m  gap-3  h-10 mt-5"}>
