@@ -1,5 +1,5 @@
 import process from "process";
-import axios from "axios";
+
 export const validerMotDePasse = (motDePasse: string) => {
     // Expression régulière pour exiger au moins 8 caractères, une majuscule, une minuscule et un chiffre
     const regexMotDePasse = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -143,29 +143,3 @@ export const dataUser = [
 ];
 
 
-//extraire l'id de la video
-export function extractVideoId(url: string) {
-    const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/;
-    const match = url.match(regExp);
-
-    return (match && match[2].length === 11) ? match[2] : null;
-}
-
-// lire l'url youtub
-export const infoArtist =async(url: string) => {
-    const apiKeyA = 'AIzaSyCscZhQmb5esZGkOPgkvWRR5FFYRnT4RO4'
-    const videoId = extractVideoId(url);
-        try {
-            const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
-                params: {
-                    part: 'snippet,contentDetails,statistics',
-                    id: videoId,
-                    key: apiKeyA,
-                },
-            });
-            return response.data.items[0];
-        } catch (error) {
-            console.error('Error fetching video info:', error);
-            return null;
-        }
-}

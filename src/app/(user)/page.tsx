@@ -16,7 +16,7 @@ import {EmailIcon,Icon} from "@chakra-ui/icons";
 import {IoMdLock} from "react-icons/io";
 import { TiSocialFacebook } from "react-icons/ti";
 import { FaGooglePlusG,FaTwitter } from "react-icons/fa";
-import {COLORS, infoArtist, validerMotDePasse} from "@/utils";
+import {COLORS, validerMotDePasse} from "@/utils";
 import {Join} from "@/components";
 import Link from "next/link";
 import {AppDispatch, RootState} from "@/settings/store";
@@ -25,12 +25,12 @@ import {authService} from "@/settings/services/user";
 import {noticeFalse} from "@/helpers";
 import {useRouter} from "next/navigation";
 import {setData} from "@/storage";
-import axios from "axios";
-import {Lecteur} from "@/components";
-import ReactPlayer from "react-player";
+
 
 
 const  page=()=> {
+    const apiKeyA = 'AIzaSyCscZhQmb5esZGkOPgkvWRR5FFYRnT4RO4'
+
     const dispatch = useDispatch<AppDispatch>();
     const {statusUtils} = useSelector((state: RootState) => state.userInfo);
     const {isOpen, onOpen, onClose} = useDisclosure()
@@ -40,7 +40,6 @@ const  page=()=> {
         password: ""
     });
 
-
     const handleInputChange = (name: string, value: string) => {
         setUserInfo({
             ...userInfo,
@@ -48,6 +47,11 @@ const  page=()=> {
         });
     };
 
+    
+        // fin url
+
+// Appeler la fonction avec votre clé API et l'URL de la vidéo
+        // infoArtist('https://www.youtube.com/watch?v=hyYstTTI8J4', 'AIzaSyCscZhQmb5esZGkOPgkvWRR5FFYRnT4RO4');
 
         //send information to connexion
         const sendInfos = async () => {
@@ -150,7 +154,6 @@ const  page=()=> {
                         </Button>
                     </div>
                     <Join isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
-
                 </div>
             </section>
         )
