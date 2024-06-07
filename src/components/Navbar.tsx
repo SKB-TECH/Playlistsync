@@ -36,9 +36,9 @@ const Navbar = () => {
 
 
     return (
-        <section className={`flex justify-end items-center md:mr-10 ${sessionData?.id && "md:ml-[200px] md:gap-32 md:mr-56 justify-center"}  md:min-w-[100%] h-14 min-w-full border-b-2 dark:border-b-1 dark:border-gray-600 border-gray-20 bg-white dark:bg-dark-m fixed z-10 gap-10 md:px-10 px-4`}>
+        <section className={`flex justify-around items-center md:mr-10 ${sessionData?.id && "md:ml-[100px] md:gap-10 md:mr-56 justify-center"}  h-14 min-w-full border-b-2 dark:border-b-1 dark:border-gray-600 border-gray-20 bg-white dark:bg-dark-m fixed z-10 gap-10 md:px-10 px-4`}>
 
-                <div className={"flex h-full items-center gap-2"}>
+                <div className={"flex h-full items-center gap-2 md:ml-24"}>
                     {sessionData?.id &&<h3 className={"text-trose01 font-digital01 truncate w-24"} title={`${sessionData?.name}`}>
                         Thème: {sessionData?.name}
                     </h3>}
@@ -68,7 +68,7 @@ const Navbar = () => {
                     }
                 </div>
                 <div>
-                    { sessionDetail?.data?.dj?.id==sessionData?.djId &&
+                    {user?.id &&
                         <Menu>
                             <MenuButton>
                                 <Avatar size={"sm"} name={`${user?.pseudo}`}/>

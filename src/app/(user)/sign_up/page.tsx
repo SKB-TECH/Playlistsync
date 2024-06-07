@@ -63,7 +63,7 @@ const page=()=> {
                        const res = await dispatch(authService.signup(userInfo));
                        console.log("rep",res)
                        if (res.meta.requestStatus == "fulfilled") {
-                           setData("token", res?.payload?.data?.access_Token);
+                           setData("token", res?.payload.data?.access_token);
                            setData("user", res?.payload?.data?.user);
                            router.push("/home");
                        }

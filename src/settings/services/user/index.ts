@@ -55,8 +55,7 @@ const signup = createAsyncThunk(
             );
 
             const data = await reponse.data;
-            // data && setData("user", data?.user);
-            // data && setData("token", data?.accessToken);
+            console.log("data***",data)
             return data;
         } catch (error: any) {
             return rejectWithValue(errorHandel(error));

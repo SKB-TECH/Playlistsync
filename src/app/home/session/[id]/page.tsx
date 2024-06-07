@@ -76,7 +76,7 @@ const Page =({params}:{params:{id:string}})=> {
 
     return (
         <section  className={`flex flex-row justify-between md:ml-32 ${sessionData?.id && "md:ml-56"}   md:padding-container md:min-w-[100%] gap-5 bg-light-m dark:bg-dark-m w-[100%] md:min-h-full`}>
-            <div className={"md:min-w-[60%] flex flex-col  md:gap-10 gap-4 bg-light-m dark:bg-dark-m md:min-h-full md:mt-0 min-w-full mt-14 "}>
+            <div className={"md:min-w-[60%] flex flex-col  md:gap-10 gap-4 bg-light-m dark:bg-dark-m md:min-h-full md:mt-0 w-full mt-14 "}>
                     {
                         //@ts-ignore
                         sessionDetail?.data?.playlist?.musics?.length>0 ?
@@ -85,9 +85,9 @@ const Page =({params}:{params:{id:string}})=> {
                         controls={true}
                         onEnded={handleEnd}
                         playing={isPlaying}
-                        className={"min-w-full h-full mt-5 bg-light-m dark:bg-dark-m"}
+                        className={"h-full mt-5 bg-light-m dark:bg-dark-m justify-center items-center"}
                     />):(
-                        <div className={"w-full min-h-60 bg-gray-300 flex flex-col justify-center items-center rounded-lg"}>
+                        <div className={"w-full min-h-60 bg-gray-300 flex flex-col justify-center items-center rounded-lg mt-10"}>
                             <h3 className={"text-center animate-pulse text-trose01 font-digital01 bold-32"}>
                                 Ajouter des Urls pour votre Session
                             </h3>

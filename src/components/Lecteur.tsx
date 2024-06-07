@@ -46,7 +46,7 @@ const Lecteur = ({ url }: Props) => {
                     key: apiKeyA,
                 },
             });
-            if (response.data.items.length === 0) {
+            if (response?.data?.items.length === 0) {
                 throw new Error('No video found for the given ID.');
             }
             return response.data.items[0];
@@ -70,33 +70,26 @@ const Lecteur = ({ url }: Props) => {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const handleFetchInfo = async () => {
-        setError('');
-        const videoId = extractVideoId(url);
-        if (videoId) {
-            const videoInfo = await getVideoInfo(videoId);
-            if (videoInfo) {
-                setVideoInfo(videoInfo);
-                const artistInfo = extractArtistInfo(videoInfo);
-                setArtistInfo(artistInfo);
-            }
-        } else {
-            setError("Cet URL n'est pas valide pour YouTube.");
-        }
-    };
+
+
 
     useEffect(() => {
-    if (typeof window !== 'undefined') { 
-        let isApiSubscribed = true;
-        // Vérification de l'environnement client
-            handleFetchInfo();
-        
-        return () => {
-            // cancel the subscription
-            isApiSubscribed = false;
+        const handleFetchInfo = async () => {
+            setError('');
+            const videoId = extractVideoId(url);
+            if (videoId) {
+                const videoInfo = await getVideoInfo(videoId);
+                if (videoInfo) {
+                    setVideoInfo(videoInfo);
+                    const artistInfo = extractArtistInfo(videoInfo);
+                    setArtistInfo(artistInfo);
+                }
+            } else {
+                setError("Cet URL n'est pas valide pour YouTube.");
+            }
         };
-    }
-    }, [handleFetchInfo, url]);
+        handleFetchInfo();
+    }, []);
 
     return (
         <div>
