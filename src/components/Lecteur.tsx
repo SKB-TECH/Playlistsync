@@ -29,7 +29,7 @@ const Lecteur = ({ url }: Props) => {
     const [videoInfo, setVideoInfo] = useState<VideoInfo | null>(null);
     const [artistInfo, setArtistInfo] = useState<ArtistInfo | null>(null);
     const [error, setError] = useState('');
-    const apiKeyA = 'AIzaSyCscZhQmb5esZGkOPgkvWRR5FFYRnT4RO4';
+    const apiKeyA = 'AIzaSyDf2Y7p8Ym4jg9qhYgi7R5zKR-USAY7LOc';
 
     const extractVideoId = (url: string): string | null => {
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
