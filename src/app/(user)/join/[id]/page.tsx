@@ -26,7 +26,6 @@ const Page = ({params}:{params:{id:string}}) => {
             const res = await dispatch(sessionService.JoinSession(sessionInfo));
             // @ts-ignore
             if (res.meta.requestStatus == "fulfilled") {
-                //  dispatch(joinSession(res?.payload?.data?.participant));
                 setData("participant",res?.payload?.data?.participant)
                 router.push(`/home/session/${res?.payload?.data?.session?.id}`);
             }

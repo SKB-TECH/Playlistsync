@@ -17,7 +17,7 @@ export default function Layout({
   return (
     <html lang="en" suppressContentEditableWarning={true}>
       <body>
-      {/*<ProvidersState>*/}
+     
           <ProviderThemes>
               <ProvidersState>
                 <Providers>
@@ -25,7 +25,7 @@ export default function Layout({
                 </Providers>
               </ProvidersState>
           </ProviderThemes>
-      {/*</ProvidersState>*/}
+   
       </body>
     </html>
   )
