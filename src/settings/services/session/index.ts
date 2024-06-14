@@ -111,8 +111,33 @@ const JoinSession = createAsyncThunk(
     }
 );
 
+const CommentSession = createAsyncThunk(
+    "session/chat",
+    async(datas: any, thunkAPI) => {
+        const { rejectWithValue } = thunkAPI;
+        try {
+                const reponse = await toast.promise(
+                    axios.post(`${URL_API}sessions/${datas?.sessionId}/chat`,datas),
+                    {
+                        error: {
+                            render({ data }) {
+                                return errorHandel(data);
+                            },
+                        },
+                    }
+                );
+                const data = await reponse.data;
+                return data;
+
+        } catch (error: any) {
+            return rejectWithValue(errorHandel(error));
+        }
+    }
+);
+
 export const sessionService = {
     NewSession,
     SessionInfo,
     JoinSession,
+    CommentSession
 };

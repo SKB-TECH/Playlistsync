@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { createSlice } from "@reduxjs/toolkit";
-import { getData } from "@/storage";
+import {getData, setData} from "@/storage";
 import {sessionService} from "@/settings/services/session";
 
 const {NewSession,SessionInfo}=sessionService
@@ -13,12 +13,22 @@ const initialState = {
     },
     sessionData:  getData("session")||[],
     sessionDetail:  getData("sessionDetail")||[],
+    participant:getData("participant")||[]
 } as never;
 
 const session = createSlice({
     name: "api1",
     initialState: initialState,
-    reducers: {},
+    reducers: {
+        updateSessionInfo: (state, {payload}) => {
+            setData("sessionDetail",payload)
+            state.sessionDetail=payload;
+        },
+
+        joinSession: (state, {payload}) => {
+            state.participant=payload;
+        },
+    },
     extraReducers: (builder) =>
         //all agent of systeme
         builder
@@ -62,4 +72,5 @@ const session = createSlice({
 
 });
 
+export const {updateSessionInfo,joinSession}=session.actions
 export default session.reducer;
