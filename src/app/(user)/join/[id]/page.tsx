@@ -8,7 +8,9 @@ import {sessionService} from "@/settings/services/session";
 import {noticeFalse} from "@/helpers";
 import {useRouter} from "next/navigation"
 import {useDispatch} from "react-redux";
-
+import {useSocket} from "@/socket"
+import { setData } from '@/storage';
+import { joinSession } from '@/settings/slices/session';
 
 const Page = ({params}:{params:{id:string}}) => {
     const dispatch = useDispatch();
@@ -17,15 +19,16 @@ const Page = ({params}:{params:{id:string}}) => {
         accessCode:params?.id,
         pseudo:"",
     });
-
-
+    const socket = useSocket("sessions");
+    // const socket=useSocket("sessions");
     const JoinSessions = async () => {
         if (sessionInfo.pseduo!=="" && sessionInfo.accessCode!==""){
             const res = await dispatch(sessionService.JoinSession(sessionInfo));
             // @ts-ignore
             if (res.meta.requestStatus == "fulfilled") {
-                // @ts-ignore
-                router.push(`/home/session/${res?.payload?.data?.sessionId}`);
+                //  dispatch(joinSession(res?.payload?.data?.participant));
+                setData("participant",res?.payload?.data?.participant)
+                router.push(`/home/session/${res?.payload?.data?.session?.id}`);
             }
         }
         else{

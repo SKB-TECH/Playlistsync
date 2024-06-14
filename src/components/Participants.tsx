@@ -26,11 +26,11 @@ const Participants =({pseudo}:ParticipantsProps)=> {
     return (
         <div className={"w-full h-16 flex  flex-row justify-between items-center gap-5  border-b-[1px] dark:border-gray-400 border-gray-300"}>
             <div className={"flex items-center gap-2"}>
-                <div className={`w-10 h-10 rounded-full flexCenter p-4 bg-[${bgColor}] relative`} style={{backgroundColor:bgColor}}>
+                <div className={`w-8 h-8 rounded-full flexCenter p-4 bg-[${bgColor}] relative`} style={{backgroundColor:bgColor}}>
                     <h4 className={"text-uppercase leading-tight text-white"}>
                         {pseudo?.charAt(0).toUpperCase()}
                     </h4>
-                    <span className={"absolute w-2 h-2 rounded-full bg-green-500 top-8 left-8 "}/>
+                    <span className={"absolute w-2 h-2 rounded-full bg-green-500 top-8 left-6 "}/>
                 </div>
                 <div className={"flex flex-col items-center mt-1 ml-2"}>
                     <h3 className={"text-lg dark:text-gray-300 text-black"}>{

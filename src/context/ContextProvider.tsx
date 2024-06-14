@@ -9,9 +9,6 @@ interface ContextProps {
     setIsclick: React.Dispatch<React.SetStateAction<boolean>>;
     user:any;
     setUser: React.Dispatch<React.SetStateAction<any>>;
-    currentMode:string;
-    setCurrentMode: React.Dispatch<React.SetStateAction<string>>;
-    changeMode: any;
 }
 
 interface ContextProviderProps {
@@ -27,15 +24,10 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
     // Define your state and methods here
     const [isclick, setIsclick] = useState(false);
     const [user, setUser] = useState([{}]);
-    const [currentMode, setCurrentMode] = useState<string>('dark');
 
-    const changeMode=(e:string)=>{
-        setCurrentMode(e)
-        setData("theme",e)
-    }
 
     return (
-        <ContextApi.Provider value={{isclick, setIsclick, user, setUser, currentMode, setCurrentMode, changeMode}}>
+        <ContextApi.Provider value={{isclick, setIsclick, user, setUser}}>
             {children}
         </ContextApi.Provider>
     );
