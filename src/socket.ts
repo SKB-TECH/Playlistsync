@@ -9,6 +9,9 @@ const useSocket = (namespace: string): Socket | null => {
     useEffect(() => {
         const newSocket = io(`${URL_API}${namespace}`, {
             withCredentials: true,
+            extraHeaders: {
+                'Access-Control-Allow-Origin': '*', 
+              },
         });
 
         setSocket(newSocket);
