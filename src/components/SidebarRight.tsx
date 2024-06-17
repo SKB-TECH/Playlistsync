@@ -49,40 +49,7 @@ const SidebarRight = () => {
             noticeFalse("Ecrivez ton message !!")
         }
     }}
-    const pseudo = "shako";
-
-    const comments = [
-        {
-            pseudo: "Benjamin",
-            message: "comment tu vas"
-        },
-        {
-            pseudo: "Benjamin",
-            message: "comment tu vas"
-        },
-       
-        {
-            pseudo: "Benjamin",
-            message: "comment tu vas"
-        },
-        {
-            pseudo: "Benjamin",
-            message: "comment tu vas"
-        },
-        {
-            pseudo: "Benjamin",
-            message: "comment tu vas"
-        },
-        {
-            pseudo: "Benjamin",
-            message: "comment tu vas"
-        },
-        {
-            pseudo: "Benjamin",
-            message: "comment tu vas"
-        },
-    
-    ];
+ 
 
     const commentsEndRef = useRef(null);
 
@@ -93,7 +60,7 @@ const SidebarRight = () => {
 
     useEffect(() => {
         scrollToBottom();
-    }, [comments]);
+    }, [sessionDetail]);
 
 
     const showName=(id:string)=>{
