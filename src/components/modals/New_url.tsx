@@ -83,14 +83,6 @@ const New_url=({isOpen,onOpen,onClose,idsession}:modal)=> {
                 <ModalHeader>Nouveau Url</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
-                    <FormControl mt={4}>
-                        <FormLabel>Artiste </FormLabel>
-                        <Input  type={"texte"} placeholder='Fally Ipupa' onChange={(e)=>handleInputChange("artiste",e.target.value)}  />
-                    </FormControl>
-                    <FormControl mt={4}>
-                        <FormLabel>Titre de la video ou Chanson </FormLabel>
-                        <Input  type={"texte"} placeholder='Amore ' onChange={(e)=>handleInputChange("title",e.target.value)}  />
-                    </FormControl>
                     <FormControl mt={4} isRequired={true}>
                         <FormLabel>Url </FormLabel>
                         <Input  type={"texte"} placeholder='https://youtub/......' onChange={(e)=>handleInputChange("url",e.target.value)}  />

@@ -23,14 +23,16 @@ const SidebarLeft =()=> {
     const {setTheme,resolvedTheme}=useTheme();
     const {user}=useSelector((state:RootState) => state.userInfo);
     const {sessionData,sessionDetail}=useSelector((state:RootState) => state.session);
-    
+
+
+    console.log( sessionDetail?.data?.djId === sessionData?.djI)
     return (
         <section className={`min-w-[16%] ${sessionData?.id && "min-w-[24%"}  dark:bg-dark-m bg-white border-r-2 border-gray-200 dark:border-r-1 dark:border-gray-600 h-screen  fixed shadow-md z-50 md:flex flex-col hidden`}>
             <div className={"w-full px-4 py-4 flexStart gap-3"}>
                 <Image src={"/logo.png"} alt={"logo"}  width={40} height={40}/>
                 <h2 className={'bold-20 font-lazer text-trose01'}>PlayListSync</h2>
             </div>
-            { <div className={"bg-light-m dark:bg-dark-m py-4  w-full h-full"}>
+            {sessionDetail?.length !=0 && <div className={"bg-light-m dark:bg-dark-m py-4  w-full h-full"}>
                 <Tabs variant='line'>
                     <TabList>
                         <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
@@ -39,7 +41,7 @@ const SidebarLeft =()=> {
                                 <h6 className={`${resolvedTheme == "dark" ? "text-white" : "text-trose01"}`}>Participants</h6>
                             </div>
                         </Tab>
-                       {  sessionDetail?.data?.dj?.id == sessionData?.djId && <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
+                       {  sessionDetail?.data?.length!==0 && <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
                             <div className={"flex items-center gap-1"}>
                                 <IoShareSocial size={15}
                                                color={resolvedTheme == "dark" ? "white" : `${COLORS.rose01}`}/>
@@ -48,7 +50,7 @@ const SidebarLeft =()=> {
                         </Tab>}
                         {
                             //@ts-ignore
-                            sessionDetail?.data?.dj?.id == sessionData?.djId &&  //@ts-ignore
+                            sessionDetail?.data?.dj?.id === sessionData?.djId &&  //@ts-ignore
                             <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
                                 <div className={"flex items-center gap-1"}>
                                     <CiSettings size={15}
@@ -78,10 +80,10 @@ const SidebarLeft =()=> {
                                 )}
                             </div>
                         </TabPanel>
-                       {  sessionDetail?.data?.dj?.id == sessionData?.djId && <TabPanel>
+                       {  sessionDetail?.data?.length!=0 && <TabPanel>
                             <Share/>
                         </TabPanel>}
-                       {  sessionDetail?.data?.dj?.id == sessionData?.djId && <TabPanel>
+                       {<TabPanel>
                             <Options/>
                         </TabPanel>}
                     </TabPanels>
