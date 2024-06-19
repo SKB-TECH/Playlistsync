@@ -49,7 +49,7 @@ const Share = () => {
 
   const CopyPast = async () => {
     try {
-      await navigator.clipboard.writeText(sessionData?.accessCode);
+      await navigator.clipboard.writeText(sessionDetail?.data?.accessCode || sessionData?.accessCode);
       toast({
         title: "Code copié avec succès !",
         status: "success",

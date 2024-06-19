@@ -6,6 +6,7 @@ import {FaPlus} from "react-icons/fa";
 import moment from "moment";
 import {Join, New_session} from "@/components/index";
 import {useDisclosure} from "@chakra-ui/react";
+import {GoPlus} from "react-icons/go";
 const Welcome =()=> {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [action,setAction]=useState(false)
@@ -17,12 +18,12 @@ const Welcome =()=> {
     return (
         <section className="dark:bg-dark-m mt-40 bg-light-m px-5 gap-24 flex justify-between min-w-[80%] md:h-96  h-full ">
             <div className={"flex flex-col md:justify-center items-center gap-10 "}>
-                <button className={"flex items-center p-2 gap-2 h-14 w-56 bg-bleu02 text-white text-lg rounded-lg"} onClick={onOpen}>
+                <button className={"flex items-center p-2 gap-2 h-12 w-56 bg-bleu02 text-white text-lg rounded-lg"} onClick={onOpen}>
                     <LuUserPlus2 size={32} color={"white"}/>
                     Joindre une Session
                 </button>
-                <button className={"flex items-center p-2 gap-2 h-14 w-56 bg-rose01 text-white text-lg rounded-lg"} onClick={showModal}>
-                    <FaPlus size={32} color={"white"} />
+                <button className={"flex items-center p-2 gap-2 h-12 w-56 bg-rose01 text-white text-lg rounded-lg"} onClick={showModal}>
+                    <GoPlus size={32} color={"white"} />
                     Créer une Session
                 </button>
             </div>

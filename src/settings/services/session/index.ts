@@ -135,9 +135,62 @@ const CommentSession = createAsyncThunk(
     }
 );
 
+
+const Ilovesong = createAsyncThunk(
+    "session/love",
+    async(datas: any, thunkAPI) => {
+        const { rejectWithValue } = thunkAPI;
+        try {
+            const reponse = await toast.promise(
+                axios.post(`${URL_API}music-lovers`,datas),
+                {
+                    pending: "Deamnde En cours de Traitement ...",
+                    error: {
+                        render({ data }) {
+                            return errorHandel(data);
+                        },
+                    },
+                }
+            );
+            const data = await reponse.data;
+            return data;
+
+        } catch (error: any) {
+            return rejectWithValue(errorHandel(error));
+        }
+    }
+);
+
+const RemoveMe = createAsyncThunk(
+    "session/love",
+    async(datas: any, thunkAPI) => {
+        const { rejectWithValue } = thunkAPI;
+        try {
+            const reponse = await toast.promise(
+                axios.delete(`${URL_API}music-lovers/${datas?.idurl}`,{data:{sessionId:datas?.sessionId}}),
+                {
+                    pending: "Deamnde En cours de Traitement ...",
+                    error: {
+                        render({ data }) {
+                            return errorHandel(data);
+                        },
+                    },
+                }
+            );
+            const data = await reponse.data;
+            return data;
+
+        } catch (error: any) {
+            return rejectWithValue(errorHandel(error));
+        }
+    }
+);
+
 export const sessionService = {
     NewSession,
     SessionInfo,
     JoinSession,
-    CommentSession
+    CommentSession,
+    Ilovesong,
+    RemoveMe
 };

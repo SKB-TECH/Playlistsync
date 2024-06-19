@@ -64,7 +64,6 @@ const Join=({isOpen,onOpen,onClose}:modal)=> {
         onClose()
         if (sessionInfo.name != "" && sessionInfo.theme != "") {
             const res = await dispatch(sessionService.NewSession(sessionInfo));
-            console.log("Resultat&**8",res)
             if (res.meta.requestStatus == "fulfilled") {
                 setData("session", res?.payload?.data);
                 router.push(`/home/session/${res?.payload?.data?.id}`);

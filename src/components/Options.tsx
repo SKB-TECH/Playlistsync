@@ -1,13 +1,19 @@
 import React from 'react';
 import {Checkbox, Editable, EditableInput, EditablePreview} from "@chakra-ui/react";
 import {COLORS} from "@/utils";
+import {useSelector} from "react-redux";
+import {RootState} from "@/settings/store";
 
 const Options = () => {
+    const {sessionData}=useSelector((state:RootState) => state.session);
     return (
         <section className={"W-full gap-5 flex flex-col items-center"}>
             <div className={"w-full flex  justify-between"}>
                 <label className={"text-tbleu01 text-md "}>Nombre des Micros</label>
-                <Editable defaultValue='10' width={10} height={10} borderColor={"blue"} color={COLORS.bleu01}
+                <Editable defaultValue={
+                    //@ts-ignore
+                    sessionData?.maxParticipants
+                } width={10} height={10} borderColor={"blue"} color={COLORS.bleu01}
                           alignItems={"center"} textAlign={"end"}>
                     <EditablePreview/>
                     <EditableInput type={"number"}/>
