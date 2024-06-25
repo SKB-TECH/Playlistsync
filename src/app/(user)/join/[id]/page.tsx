@@ -2,14 +2,14 @@
 //@ts-nocheck
 "use client"
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, FormControl, FormLabel, Input} from "@chakra-ui/react";
 import {sessionService} from "@/settings/services/session";
 import {noticeFalse} from "@/helpers";
 import {useRouter} from "next/navigation"
 import {useDispatch} from "react-redux";
 import {useSocket} from "@/socket"
-import { setData } from '@/storage';
+import {removeAll, setData} from '@/storage';
 import { joinSession } from '@/settings/slices/session';
 
 const Page = ({params}:{params:{id:string}}) => {
@@ -42,7 +42,9 @@ const Page = ({params}:{params:{id:string}}) => {
         });
     };
 
-    console.log(sessionInfo);
+    useEffect(() => {
+
+    }, []);
     return (
        <section className='w-full h-full py-10 md:mt-10 '>
             <div className='w-full h-full flex flex-col items-center justify-center'>

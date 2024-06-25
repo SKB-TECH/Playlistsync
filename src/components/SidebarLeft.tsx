@@ -41,8 +41,7 @@ const SidebarLeft =()=> {
                     },
                 })
             if (response.status == 200) {
-                router.push("/sign_in")
-                console.log("je suis la ben")
+                router.push("/")
                 removeItem("sessionData")
                 removeItem("sessionDetail")
 
@@ -56,7 +55,7 @@ const SidebarLeft =()=> {
         if (sessionData?.accessCode!= "") {
             const TOKEN=getData("token")||token;
             const response= await toast.promise(
-                axios.patch(`${URL_API}sessions/${sessionDeta?.id}/close`,{
+                axios.patch(`${URL_API}sessions/${sessionData?.id}/close`,{
                         headers: {
                             Authorization:`Bearer ${TOKEN}`,
                         }
