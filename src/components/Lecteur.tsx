@@ -17,7 +17,6 @@ import {RootState} from "@/settings/store";
 import {useToast} from "@chakra-ui/react";
 import { CiMicrophoneOff } from 'react-icons/ci';
 import { FcLike } from "react-icons/fc";
-import {userInfo} from "node:os";
 
 interface Props {
     url: string;
@@ -150,7 +149,7 @@ const Lecteur = ({ url,setTitle,id,listLove}: Props) => {
             }
         };
         handleFetchInfo();
-    }, []);
+    }, [extractArtistInfo, url]);
 
     // @ts-ignore
     // @ts-ignore
@@ -187,35 +186,41 @@ const Lecteur = ({ url,setTitle,id,listLove}: Props) => {
                   </h2>
                   <AccordionPanel pb={4}>
                       <Stack>
-                          {listLove?.map((item: any, index: number) => (
-                              getName(item?.participantId) &&
-                              <div className="flex justify-between items-center w-full p-2 gap-2" key={index}>
-                                  {/*<span>{getName(item?.participantId) && getName(item?.participantId)}</span>*/}
-                                  {listLove?.map((item: any, index: number) => (
-                                      getName(item?.participantId) &&
+                          {
+                                  listLove?.map((item: any, index: number) => (
                                       <div className="flex justify-between items-center w-full p-2 gap-2" key={index}>
-                                          <span>{getName(item?.participantId) && getName(item?.participantId)}</span>
 
+                                          <span>{
+                                              //@ts-ignore
+                                              getName(item?.participantId)
+                                          }</span>
                                           {
                                               //@ts-ignore
-                                              item?.participantId === participant?.id ?
-                                                  //@ts-ignore
-                                                  sesssionData?.djId!=participant?.id &&  <button
-                                                      onClick={() => unLover(item?.id)}
-                                                      className={"flex items-center justify-center gap-2 w-8 h-8 p-2 text-white rounded-lg bg-red-800  border-bgrose01"}>
-                                                      <CiMicrophoneOff color={"#fff"} size={20}/>
-                                                  </button>:
-                                                  //@ts-ignore
-                                                  sesssionData?.djId!=participant?.id && <button
-                                                      onClick={IloverSong}
-                                                      className={"flex items-center justify-center gap-2 w-8 h-8 p-2 text-white rounded-lg bg-green-600  border-bgrose01"}>
-                                                      <FaMicrophoneLines color={"#fff"} size={20}/>
-                                                  </button>
+
+                                             <div>
+                                                  {
+                                                      //@ts-ignore
+                                                      item?.participantId === participant?.id ?
+                                                          //@ts-ignore
+                                                          sesssionData?.djId !== participant?.id && <button
+                                                              //@ts-ignore
+                                                              onClick={()=>unLover(item?.id)}
+                                                              className={"flex items-center justify-center gap-2 w-8 h-8 p-2 text-white rounded-lg bg-red-800  border-bgrose01"}>
+                                                              <CiMicrophoneOff color={"#fff"} size={20}/>
+                                                          </button> :
+                                                          //@ts-ignore
+                                                          sesssionData?.djId !== participant?.id && <button
+                                                              onClick={IloverSong}
+                                                              className={"flex items-center justify-center gap-2 w-8 h-8 p-2 text-white rounded-lg bg-green-600  border-bgrose01"}>
+                                                              <FaMicrophoneLines color={"#fff"} size={20}/>
+                                                      </button>}
+                                              </div>      //@ts-ignore
+
 
                                           }
-                                      </div>))}
-                              </div>
-                          ))}
+                                      </div>))
+
+                          }
                       </Stack>
                   </AccordionPanel>
               </AccordionItem>

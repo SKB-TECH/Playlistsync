@@ -25,6 +25,7 @@ import {
 import { MdContentCopy } from "react-icons/md";
 import { useTheme } from "next-themes";
 import { COLORS } from "@/utils";
+import {getData} from "@/storage";
 
 const Share = () => {
   const { sessionData, sessionDetail } = useSelector(
@@ -49,7 +50,7 @@ const Share = () => {
 
   const CopyPast = async () => {
     try {
-      await navigator.clipboard.writeText(sessionDetail?.data?.accessCode || sessionData?.accessCode);
+      await navigator.clipboard.writeText(sessionDetail?.data?.accessCode || sessionData?.accessCode||getData("sessionDetail")?.accessCode);
       toast({
         title: "Code copié avec succès !",
         status: "success",

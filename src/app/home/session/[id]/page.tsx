@@ -42,28 +42,37 @@ const Page =({params}:{params:{id:string}})=> {
 
     useEffect(() => {
         if (!socket) return
-        socket.emit('joinSessionRoom',params?.id);
-        socket.on('userJoined',(data)=>{
-            dispatch(updateSessionInfo({data:data?.session}))
+        socket.emit('joinSessionRoom', params?.id);
+        socket.on('userJoined', (data) => {
+            dispatch(updateSessionInfo({data: data?.session}))
         })
-        socket.on('userRejoined',(data)=>{
-            dispatch(updateSessionInfo({data:data?.session}))
-        })
-
-        socket.on('musicAdded',(data)=>{
-            dispatch(updateSessionInfo({data:data?.session}))
+        socket.on('userRejoined', (data) => {
+            dispatch(updateSessionInfo({data: data?.session}))
         })
 
-        socket.on('messageSent',(data)=>{
-            dispatch(updateSessionInfo({data:data?.session}))
+        socket.on('musicAdded', (data) => {
+            dispatch(updateSessionInfo({data: data?.session}))
         })
-        socket.on('addLover',(data)=>{
-            dispatch(updateSessionInfo({data:data?.session}))
+
+        socket.on('messageSent', (data) => {
+            dispatch(updateSessionInfo({data: data?.session}))
         })
-        socket.on('removeLover',(data)=>{
-            dispatch(updateSessionInfo({data:data?.session}))
+        socket.on('addLover', (data) => {
+            dispatch(updateSessionInfo({data: data?.session}))
         })
-    },[socket]);
+        socket.on('removeLover', (data) => {
+            dispatch(updateSessionInfo({data: data?.session}))
+        })
+
+        socket.on('userQuit', (data) => {
+            dispatch(updateSessionInfo({data: data?.session}))
+        })
+        socket.on('sessionClosed', (data) => {
+            router.push("/sign_in")
+        })
+
+
+    });
 
 
     const handleEnd = () => {
@@ -71,21 +80,7 @@ const Page =({params}:{params:{id:string}})=> {
     };
 
 
-    // quitter la session
-    const QuitteSession = async () => {
-        if (sessionData?.accessCode!= "") {
-           const response= await toast.promise(
-                axios.post(`${URL_API}sessions/quit`,{
-                    "accessCode":sessionData?.accessCode,
-                }))
-                if (response.status == 201) {
-                    removeItem("sessionData")
-                    removeItem("sessionDetail")
-                    removeItem("session")
-                    router.push("/home")
-                }
-        }
-    };
+
 
     return (
         <section  className={`flex flex-row justify-start md:ml-32 ${sessionData?.id && "md:ml-56"}   md:padding-container md:min-w-[100%] bg-light-m dark:bg-dark-m w-[100%] md:min-h-full`}>
@@ -116,18 +111,8 @@ const Page =({params}:{params:{id:string}})=> {
                         </div>
                     )}
                 {<div className={"flex justify-center items-center bg-light-m dark:bg-dark-m  gap-3  h-10 mt-5"}>
-                    {sessionDetail?.data?.dj?.id == sessionData?.djId &&  <button
-                        className={"md:w-28 h-10 w-10 hover:cursor-pointer  flexCenter p-1 items-center gap-1  bg-red-500 text-white md:rounded-lg rounded-full "}
-                        onClick={QuitteSession}
-
-                    >
-                        <MdOutlineCallEnd size={20} color={"white"}/>
-                        <span className={"hidden md:flex text-white"}>
-                            Arrêter
-                        </span>
-                    </button>}
                     <button
-                        className={" hover:cursor-pointer flexCenter md:w-32 h-10 w-10 p-1 items-center  bg-green-400 text-white md:rounded-lg rounded-full"}
+                        className={" hover:cursor-pointer flexCenter md:w-44 h-10 w-10 p-1 items-center  bg-green-400 text-white md:rounded-lg rounded-full"}
                         onClick={onOpen}
                     >
                         <MdOutlineAddLink size={20} color={"white"}/>
@@ -136,29 +121,18 @@ const Page =({params}:{params:{id:string}})=> {
                         </span>
                     </button>
                    { sessionDetail?.data?.dj?.id == sessionData?.djId && <button
-                        className={"md:w-32 h-10 w-10 flexCenter hover:cursor-pointer  gap-2 p-1 items-center  bg-gray-400 text-white md:rounded-lg rounded-full"}>
+                        className={"md:w-44 h-10 w-10 flexCenter hover:cursor-pointer  gap-2 p-1 items-center  bg-gray-400 text-white md:rounded-lg rounded-full"}>
                         <FaUserPlus size={20} color={"white"}/>
                         <span className={"hidden md:flex text-white"}>
                            Partcipant
                         </span>
                     </button>}
-                   {/*{ sessionDetail?.data?.dj?.id == sessionData?.djId &&  <div className={"h-full flex w-44 gap-2 text-white rounded-lg "}>*/}
-                   {/*     <span className={"w-10 h-10 rounded-full flexCenter p-1 bg-gray-400 hover:cursor-pointer"}*/}
-                   {/*           onClick={() => setCurrentVideoIndex((currentVideoIndex - 1 + playlist.length) % playlist.length)}*/}
-                   {/*     >*/}
-                   {/*        <BsCaretLeft size={25} color={"#f200ab"}/>*/}
-                   {/*     </span>*/}
-                   {/*     <span className={"w-10 h-10 rounded-full flexCenter p-1 bg-gray-400 hover:cursor-pointer"}*/}
-                   {/*           onClick={() => setCurrentVideoIndex((currentVideoIndex + 1) % playlist.length)}*/}
-                   {/*     >*/}
-                   {/*        <BsCaretRight size={25} color={"#f200ab"}/>*/}
-                   {/*     </span>*/}
-                   {/* </div>}*/}
                 </div>}
                 <div className={"md:min-w-[80%] border-gray-900 rounded-lg md:h-[36rem] h-[30rem] w-[100%] mt-5 md:mt-10"}>
                     <div className={"w-full h-full overflow-y-auto customer-scrollbar px-2"}>
                         <Accordion allowMultiple={true} className={"text-black dark:text-gray-300"}>
                             {
+                                //@ts-ignore
                                 sessionDetail?.data?.playlist?.musics?.map((item,index) => (
                                     <Lecteur url={item?.url} id={item?.id} setTitle={setTitle} key={index} listLove={item?.songLovers}/>
                                 ))
@@ -171,7 +145,10 @@ const Page =({params}:{params:{id:string}})=> {
             <div className={"hidden md:flex md:min-w-[40%] border-l-1 border-gray-200"}>
                 <SidebarRight/>
             </div>
-            <New_url isOpen={isOpen} onClose={onClose} idsession={sessionDetail?.data?.id}/>
+            <New_url isOpen={isOpen} onClose={onClose} idsession={
+                //@ts-ignore
+                sessionDetail?.data?.id
+            }/>
         </section>
     );
 };
