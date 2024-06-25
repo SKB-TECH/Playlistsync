@@ -68,7 +68,7 @@ const Page =({params}:{params:{id:string}})=> {
             dispatch(updateSessionInfo({data: data?.session}))
         })
         socket.on('sessionClosed', (data) => {
-            router.push("/sign_in")
+            router.push("/home")
         })
 
 

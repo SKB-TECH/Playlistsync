@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client"
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Image from "next/image";
 import {
     Button,
@@ -24,7 +24,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {authService} from "@/settings/services/user";
 import {noticeFalse} from "@/helpers";
 import {useRouter} from "next/navigation";
-import {setData} from "@/storage";
+import {removeItem, setData} from "@/storage";
 
 
 
@@ -47,7 +47,12 @@ const  page=()=> {
         });
     };
 
-    
+
+    useEffect(() => {
+        removeItem("sessionData")
+        removeItem("sessionDetail")
+        removeItem("session")
+    }, []);
         // fin url
 
 // Appeler la fonction avec votre clé API et l'URL de la vidéo
