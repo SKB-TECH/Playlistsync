@@ -19,6 +19,7 @@ import axios from "axios";
 import {getData, removeItem} from "@/storage";
 import {errorHandel} from "@/helpers";
 import {useRouter} from "next/navigation";
+import {router} from "next/client";
 
 
 
@@ -55,10 +56,10 @@ const SidebarLeft =()=> {
         if (sessionData?.accessCode!= "") {
             const TOKEN=getData("token")||token;
             const response= await toast.promise(
-                axios.patch(`${URL_API}sessions/${sessionData?.id}/close`,{
-                        headers: {
-                            Authorization:`Bearer ${TOKEN}`,
-                        }
+                axios.patch(`${URL_API}sessions/${sessionData?.id}/close`,{},{
+                    headers: {
+                        Authorization:`Bearer ${TOKEN}`,
+                    }
                     }
                 ),{
                     pending: "Encours de fermeture ...",
@@ -72,7 +73,7 @@ const SidebarLeft =()=> {
                 removeItem("sessionData")
                 removeItem("sessionDetail")
                 removeItem("session")
-                router.push("/home")
+                // sessionDetail?.data?.dj?.id === sessionData?.djId ? router.push("/home"): router.push("/")
             }
         }
     };
