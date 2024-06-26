@@ -12,12 +12,10 @@ import axios from "axios";
 import ReactPlayer from "react-player";
 import {MdOutlineAddLink, MdOutlineCallEnd} from "react-icons/md";
 import {FaUserPlus} from "react-icons/fa";
-import {toast} from "react-toastify";
-import {URL_API} from "@/utils";
 import {router} from "next/client";
 import useSocket from "@/socket";
 import {updateSessionInfo} from "@/settings/slices/session";
-
+import {useRouter} from "next/navigation";
 
 const Page =({params}:{params:{id:string}})=> {
 
@@ -28,6 +26,8 @@ const Page =({params}:{params:{id:string}})=> {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const socket = useSocket("sessions");
     const [title, setTitle] = useState()
+    const router = useRouter();
+
 
     // // get all informations of session
     useEffect(() => {
@@ -68,7 +68,10 @@ const Page =({params}:{params:{id:string}})=> {
             dispatch(updateSessionInfo({data: data?.session}))
         })
         socket.on('sessionClosed', (data) => {
-            router.push("/home")
+            removeItem("sessionData")
+            removeItem("sessionDetail")
+            removeItem("session")
+            sessionDetail?.data?.dj?.id === sessionData?.djId ? router.push("/home"): router.push("/")
         })
 
 
@@ -92,7 +95,7 @@ const Page =({params}:{params:{id:string}})=> {
                         url={sessionDetail?.data?.playlist?.musics[currentVideoIndex]?.url}
                         controls={true}
                         onEnded={handleEnd}
-                        // playing={isPlaying}
+                        playing={isPlaying}
                         className={"h-full mt-5 bg-light-m dark:bg-dark-m justify-center items-center"}
                     />):(
                         <div className={"w-full min-h-60 bg-gray-300 flex flex-col justify-center items-center rounded-lg mt-10"}>
