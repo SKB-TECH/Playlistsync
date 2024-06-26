@@ -92,13 +92,13 @@ const SidebarLeft =()=> {
                 <div className={"bg-light-m dark:bg-dark-m py-4  w-full h-full flex flex-col"}>
                     <Tabs variant='line'>
                         <TabList>
-                            <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
+                            {sessionDetail?.data?.length !== 0 && <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
                                 <div className={"flex items-center gap-1"}>
                                     <FaUserPlus size={15}
                                                 color={resolvedTheme == "dark" ? "white" : `${COLORS.rose01}`}/>
                                     <h6 className={`${resolvedTheme == "dark" ? "text-white" : "text-trose01"}`}>Participants</h6>
                                 </div>
-                            </Tab>
+                            </Tab>}
                             {sessionDetail?.data?.length !== 0 &&
                                 <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
                                     <div className={"flex items-center gap-1"}>
@@ -120,7 +120,7 @@ const SidebarLeft =()=> {
                             }
                         </TabList>
                         <TabPanels>
-                            <TabPanel>
+                            {sessionDetail?.data?.length != 0 && <TabPanel>
                                 <div className={"flex flex-col gap-10 items-center md:h-[60rem]"}>
                                     {sessionDetail?.data?.participants?.length > 0 ? <div
                                         className={"flex flex-col gap-1 items-center max-h-full w-[100%]  overflow-y-auto customer-scrollbar"}>
@@ -140,23 +140,24 @@ const SidebarLeft =()=> {
                                         </div>
                                     )}
                                 </div>
-                            </TabPanel>
+                            </TabPanel>}
                             {sessionDetail?.data?.length != 0 && <TabPanel>
                                 <Share/>
                             </TabPanel>}
-                            {<TabPanel>
+                            {sessionDetail?.data?.dj?.id === sessionData?.djId && <TabPanel>
                                 <Options/>
                             </TabPanel>}
                         </TabPanels>
                     </Tabs>
-                    <div className={"w-full h-16 flex  z-50 justify-center items-center  "}>
-                        <button className={"bg-red-500 text-white text-center text-lg h-12 rounded-lg p-2  w-44 "} onClick={sessionDetail?.data?.dj?.id == sessionData?.djId ? FermerSession:()=>QuitteSession({
-                            accessCode:sessionDetail?.accessCode||getData("sessionDetail")?.accessCode,
-                            participantId:participant?.id||getData("participant")?.id
-                        })}>
-                            {sessionDetail?.data?.dj?.id == sessionData?.djId ? "Fermer la session":"Quitter la session"}
+                    {sessionDetail?.data?.length != 0 && <div className={"w-full h-16 flex  z-50 justify-center items-center  "}>
+                        <button className={"bg-red-500 text-white text-center text-lg h-12 rounded-lg p-2  w-44 "}
+                                onClick={sessionDetail?.data?.dj?.id == sessionData?.djId ? FermerSession : () => QuitteSession({
+                                    accessCode: sessionDetail?.accessCode || getData("sessionDetail")?.accessCode,
+                                    participantId: participant?.id || getData("participant")?.id
+                                })}>
+                            {sessionDetail?.data?.dj?.id == sessionData?.djId ? "Fermer la session" : "Quitter la session"}
                         </button>
-                    </div>
+                    </div>}
                 </div>}
 
         </section>

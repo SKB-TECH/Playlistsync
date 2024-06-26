@@ -71,6 +71,7 @@ const Page =({params}:{params:{id:string}})=> {
             removeItem("sessionData")
             removeItem("sessionDetail")
             removeItem("session")
+            dispatch(updateSessionInfo({data:[]}))
             sessionDetail?.data?.dj?.id === sessionData?.djId ? router.push("/home"): router.push("/")
         })
 
