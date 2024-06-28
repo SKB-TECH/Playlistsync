@@ -38,8 +38,8 @@ const Share = () => {
   const shareElement =
     typeof window !== "undefined" &&
     window.location.host +
-      `/join/${sessionDetail?.data?.accessCode || sessionData?.accessCode}`;
-  const title = "Play List Sync";
+      `/join/${sessionData?.accessCode||sessionDetail?.data?.accessCode}`;
+  const title = "Clique sur ce lien pour joindre la session en cours:  ";
 
   const generateCode = () => {
     // @ts-ignore
