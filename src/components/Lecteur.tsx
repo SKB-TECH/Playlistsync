@@ -50,7 +50,7 @@ const Lecteur = ({ url,setTitle,id,listLove}: Props) => {
     const [error, setError] = useState('');
     const {sesssionData,sessionDetail,participant}=useSelector((state: RootState) =>state.session);
     const dispatch=useDispatch()
-    const apiKeyA = 'AIzaSyDf2Y7p8Ym4jg9qhYgi7R5zKR-USAY7LOc';
+    const apiKeyA = 'AIzaSyBl1HoYOLh-cKX7PomQY6NuJn6CGyBUWGw';
     const toast=useToast()
     //@ts-ignore
     const OtherId=sessionDetail?.data?.participants?.find(its=>its?.userId===sessionDetail?.data?.djId)?.id;
