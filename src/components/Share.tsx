@@ -156,7 +156,7 @@ const Share = () => {
         <div
           className={"flex items-center gap-5 dark:text-gray-300 text-black/50"}
         >
-          <h1>{sessionData?.accessCode}</h1>
+          <h1>{sessionDetail?.data?.accessCode || sessionData?.accessCode}</h1>
           <MdContentCopy
             size={25}
             color={`${resolvedTheme == "dark" ? COLORS.rose01 : COLORS.bleu01}`}
