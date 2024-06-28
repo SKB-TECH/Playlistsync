@@ -1,7 +1,7 @@
 //@ts-nocheck
 "use client"
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useRef} from 'react';
 import {Accordion,useDisclosure} from "@chakra-ui/react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch, RootState} from "@/settings/store";
@@ -16,13 +16,15 @@ import {router} from "next/client";
 import useSocket from "@/socket";
 import {updateSessionInfo} from "@/settings/slices/session";
 import {useRouter} from "next/navigation";
-
+import moment from 'moment';
 const Page =({params}:{params:{id:string}})=> {
 
     const dispatch = useDispatch<AppDispatch>();
     const {sessionData,sessionDetail}=useSelector((state:RootState) => state.session);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const playRef=useRef(null);
+    const [time,setTime]=useState(0);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const socket = useSocket("sessions");
     const [title, setTitle] = useState()
@@ -39,6 +41,36 @@ const Page =({params}:{params:{id:string}})=> {
         }
         sessionData();
     }, [dispatch,params?.id]);
+    //on play 
+    const handleplay=()=>{
+        setIsPlaying(true);
+        socket?.emit("play",{time:playRef?.current?.getCurrentTime()});
+    }
+    //on pause
+    const handlePause = () => {
+        setPlaying(false);
+        socket.emit('pause', { time: playerRef.current.getCurrentTime() });
+      };
+      
+    //on suate 
+    const handleSeek = (time) => {
+    socket.emit('seek', { time });
+    };
+
+    
+    // la fin de la chanson
+    const handleEnd = () => {
+        setCurrentVideoIndex((currentVideoIndex + 1) % sessionDetail?.data?.playlist?.musics?.length);
+    };
+
+    const handlePress=(e:any)=>{
+        if (sessionDetail?.data?.dj?.id == sessionData?.djId) {
+            socket?.emit("getTime",({
+                time:e.playedSeconds
+            }))
+        }
+    }
+
 
     useEffect(() => {
         if (!socket) return
@@ -67,6 +99,8 @@ const Page =({params}:{params:{id:string}})=> {
         socket.on('userQuit', (data) => {
             dispatch(updateSessionInfo({data: data?.session}))
         })
+
+        
         socket.on('sessionClosed', (data) => {
             removeItem("sessionData")
             removeItem("sessionDetail")
@@ -75,17 +109,34 @@ const Page =({params}:{params:{id:string}})=> {
             sessionDetail?.data?.dj?.id === sessionData?.djId ? router.push("/home"): router.push("/")
         })
 
-
+       socket.on("play",({time})=>{
+            setTime(time)
+            console.log("time on play",time)
+       })
+        socket.on("pause",({time})=>{
+                setTime(time)
+                console.log("time on pause",time)
+        })
+        socket.on("seek",({time})=>{
+            setTime(time)
+            console.log("time on seek",time)
+        })
+        socket.on('getTime',({time})=>{
+            // console.log("time",time)
+            setTime(time)
+        })
     });
 
 
-    const handleEnd = () => {
-        setCurrentVideoIndex((currentVideoIndex + 1) % sessionDetail?.data?.playlist?.musics?.length);
-    };
 
 
-
-
+    const TimeDisplay = ({ seconds }) => {
+        const duration = moment.duration(seconds, 'seconds');
+        const formattedTime = moment.utc(duration.asMilliseconds()).format('H:mm:ss');
+   
+        return <h3 className={"text-center animate-pulse text-trose01 font-digital01 bold-32"}>{formattedTime}</h3>;
+      };
+   
     return (
         <section  className={`flex flex-row justify-start md:ml-32 ${sessionData?.id && "md:ml-56"}   md:padding-container md:min-w-[100%] bg-light-m dark:bg-dark-m w-[100%] md:min-h-full`}>
             <div className={"md:min-w-[50%] md:ml-16 flex flex-col  md:gap-10 gap-4 bg-light-m dark:bg-dark-m md:min-h-full md:mt-0 w-full mt-14 "}>
@@ -98,11 +149,17 @@ const Page =({params}:{params:{id:string}})=> {
                                 controls={true}
                                 onEnded={handleEnd}
                                 playing={isPlaying}
+                                onPause={handlePause}
+                                onPlay={handleplay}
+                                onSeek={(e)=>handleSeek(e)}
+                                ref={playRef}
+                                onProgress={handlePress}
                                 className={"h-full mt-5 bg-light-m dark:bg-dark-m justify-center items-center"}
                             />: <div className={"w-full min-h-60 bg-gray-300 flex flex-col justify-center items-center rounded-lg mt-10"}>
-                                    <h3 className={"text-center animate-pulse text-trose01 font-digital01 bold-32"}>
-                                        00:00:00
-                                    </h3>
+                                    {/* <h3 className={"text-center animate-pulse text-trose01 font-digital01 bold-32"}>
+                                        {moment.duration(time,'seconds')}
+                                    </h3> */}
+                                    <TimeDisplay seconds={time}/>
                             </div>): (
                                 <div
                                     className={"w-full min-h-60 bg-gray-300 flex flex-col justify-center items-center rounded-lg mt-10"}>
