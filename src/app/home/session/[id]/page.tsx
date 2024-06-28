@@ -88,7 +88,7 @@ const Page =({params}:{params:{id:string}})=> {
 
     return (
         <section  className={`flex flex-row justify-start md:ml-32 ${sessionData?.id && "md:ml-56"}   md:padding-container md:min-w-[100%] bg-light-m dark:bg-dark-m w-[100%] md:min-h-full`}>
-            <div className={"md:min-w-[50%] md:ml-14 flex flex-col  md:gap-10 gap-4 bg-light-m dark:bg-dark-m md:min-h-full md:mt-0 w-full mt-14 "}>
+            <div className={"md:min-w-[50%] md:ml-16 flex flex-col  md:gap-10 gap-4 bg-light-m dark:bg-dark-m md:min-h-full md:mt-0 w-full mt-14 "}>
                     {
                         //@ts-ignore
                         sessionDetail?.data?.playlist?.musics?.length>0 ?
