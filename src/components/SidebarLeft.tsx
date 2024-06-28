@@ -109,14 +109,14 @@ const SidebarLeft =()=> {
                                 </Tab>}
                             {
                                 //@ts-ignore
-                                sessionData?.djId &&  //@ts-ignore
+                                sessionData?.djId ?  //@ts-ignore
                                 <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
                                     <div className={"flex items-center gap-1"}>
                                         <CiSettings size={15}
                                                     color={resolvedTheme == "dark" ? "white" : `${COLORS.rose01}`}/>
                                         <h6 className={`${resolvedTheme == "dark" ? "text-white" : "text-trose01"}`}>Options</h6>
                                     </div>
-                                </Tab>
+                                </Tab>:""
                             }
                         </TabList>
                         <TabPanels>
@@ -144,9 +144,9 @@ const SidebarLeft =()=> {
                            <TabPanel>
                                 <Share/>
                             </TabPanel>
-                            {sessionData?.djId && <TabPanel>
+                            {sessionData?.djId ? <TabPanel>
                                 <Options/>
-                            </TabPanel>}
+                            </TabPanel>:""}
                         </TabPanels>
                     </Tabs>
                     {sessionDetail?.data?.length != 0 && <div className={"w-full h-16 flex  z-50 justify-center items-center  "}>
