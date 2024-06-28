@@ -88,32 +88,30 @@ const Page =({params}:{params:{id:string}})=> {
 
     return (
         <section  className={`flex flex-row justify-start md:ml-32 ${sessionData?.id && "md:ml-56"}   md:padding-container md:min-w-[100%] bg-light-m dark:bg-dark-m w-[100%] md:min-h-full`}>
-            <div className={"md:min-w-[50%] flex flex-col  md:gap-10 gap-4 bg-light-m dark:bg-dark-m md:min-h-full md:mt-0 w-full mt-14 "}>
+            <div className={"md:min-w-[50%] md:ml-14 flex flex-col  md:gap-10 gap-4 bg-light-m dark:bg-dark-m md:min-h-full md:mt-0 w-full mt-14 "}>
                     {
                         //@ts-ignore
                         sessionDetail?.data?.playlist?.musics?.length>0 ?
-                        (<ReactPlayer
-                        url={sessionDetail?.data?.playlist?.musics[currentVideoIndex]?.url}
-                        controls={true}
-                        onEnded={handleEnd}
-                        playing={isPlaying}
-                        className={"h-full mt-5 bg-light-m dark:bg-dark-m justify-center items-center"}
-                    />):(
-                        <div className={"w-full min-h-60 bg-gray-300 flex flex-col justify-center items-center rounded-lg mt-10"}>
-                            <h3 className={"text-center animate-pulse text-trose01 font-digital01 bold-32"}>
-                                Ajouter des Urls pour votre Session
-                            </h3>
-                            <button
-                        className={" hover:cursor-pointer flexCenter md:w-32 h-10 w-10 p-1 items-center  bg-red-500 mt-10 text-white md:rounded-lg rounded-full"}
-                        onClick={onOpen}
-                    >
-                        <MdOutlineAddLink size={20} color={"white"}/>
-                        <span className={"hidden md:flex text-white"}>
-                            Url
-                        </span>
-                    </button>
-                        </div>
-                    )}
+                         (sessionDetail?.data?.dj?.id == sessionData?.djId ?
+                             <ReactPlayer
+                                url={sessionDetail?.data?.playlist?.musics[currentVideoIndex]?.url}
+                                controls={true}
+                                onEnded={handleEnd}
+                                playing={isPlaying}
+                                className={"h-full mt-5 bg-light-m dark:bg-dark-m justify-center items-center"}
+                            />: <div className={"w-full min-h-60 bg-gray-300 flex flex-col justify-center items-center rounded-lg mt-10"}>
+                                    <h3 className={"text-center animate-pulse text-trose01 font-digital01 bold-32"}>
+                                        00:00:00
+                                    </h3>
+                            </div>): (
+                                <div
+                                    className={"w-full min-h-60 bg-gray-300 flex flex-col justify-center items-center rounded-lg mt-10"}>
+                                    <h3 className={"text-center animate-pulse text-trose01 font-digital01 bold-32"}>
+                                        Ajouter un Url
+                                    </h3>
+                                </div>
+                            )
+                    }
                 {<div className={"flex justify-center items-center bg-light-m dark:bg-dark-m  gap-3  h-10 mt-5"}>
                     <button
                         className={" hover:cursor-pointer flexCenter md:w-44 h-10 w-10 p-1 items-center  bg-green-400 text-white md:rounded-lg rounded-full"}

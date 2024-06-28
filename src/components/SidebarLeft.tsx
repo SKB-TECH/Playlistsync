@@ -109,7 +109,7 @@ const SidebarLeft =()=> {
                                 </Tab>}
                             {
                                 //@ts-ignore
-                                sessionDetail?.data?.dj?.id === sessionData?.djId &&  //@ts-ignore
+                                sessionData?.djId &&  //@ts-ignore
                                 <Tab _selected={{color: `white`, bg: `${COLORS.bleu02}`}}>
                                     <div className={"flex items-center gap-1"}>
                                         <CiSettings size={15}
@@ -141,10 +141,10 @@ const SidebarLeft =()=> {
                                     )}
                                 </div>
                             </TabPanel>}
-                            {sessionDetail?.data?.length != 0 && <TabPanel>
+                           <TabPanel>
                                 <Share/>
-                            </TabPanel>}
-                            {sessionDetail?.data?.dj?.id === sessionData?.djId && <TabPanel>
+                            </TabPanel>
+                            {sessionData?.djId && <TabPanel>
                                 <Options/>
                             </TabPanel>}
                         </TabPanels>
