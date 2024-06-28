@@ -88,7 +88,7 @@ const SidebarLeft =()=> {
                 <Image src={"/logo.png"} alt={"logo"}  width={40} height={40}/>
                 <h2 className={'bold-20 font-lazer text-trose01'}>PlayListSync</h2>
             </div>
-            {sessionData?.length !=0 &&
+            {sessionDetail?.length !=0 &&
                 <div className={"bg-light-m dark:bg-dark-m py-4  w-full h-full flex flex-col"}>
                     <Tabs variant='line'>
                         <TabList>
